@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MilestoneSearch</title>
+
+    <script type="text/javascript" src="/apps/2.1/sdk.js"></script>
+
+    <script type="text/javascript">
+        Rally.onReady(function () {
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",launch:function(){this.getContext().setProject(""),Ext.create("Rally.data.wsapi.TreeStoreBuilder").build({models:["milestone"],autoLoad:!1,enableHierarchy:!1}).then({success:this._onStoreBuilt,scope:this})},_onStoreBuilt:function(t){var e=this.getContext();this.add({xtype:"rallygridboard",context:this.getContext(),modelNames:["milestone"],toggleState:"grid",plugins:[{ptype:"rallygridboardinlinefiltercontrol",inlineFilterButtonConfig:{stateful:!0,stateId:e.getScopedStateId("filters"),modelNames:["milestone"],inlineFilterPanelConfig:{quickFilterPanelConfig:{defaultFields:["FormattedID"]}}}}],gridConfig:{store:t,columnCfgs:["FormattedID","Name","TargetDate","TotalProjectCount"]},height:this.getHeight()})}});
+
+            Rally.launchApp('CustomApp', {
+                name:"MilestoneSearch",
+                parentRepos:"",
+                version:"0.1.1"
+            });
+
+        });
+    </script>
+
+
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+</body>
+</html>
